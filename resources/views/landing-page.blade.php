@@ -40,7 +40,7 @@
                                 style="height: 200px; width: auto;">
                             <div class="card-body">
                                 <a class="card-title fw-semibold fs-5 stretched-link m-0"
-                                    href="#">{{ Str::limit($product->name, 30, '...') }}</a>
+                                    href="{{ route('products.show', $product) }}">{{ Str::limit($product->name, 30, '...') }}</a>
                                 <p class="m-0">
                                     Rp. {{ $product->price }}
                                 </p>

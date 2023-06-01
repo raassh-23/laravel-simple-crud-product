@@ -12,7 +12,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h4 class="card-title fw-bold">Produk</h4>
-                                    <a href="#" class="btn btn-primary">Kelola</a>
+                                    <a href="{{ route("products.index") }}" class="btn btn-primary">Kelola</a>
                                 </div>
                                 <div>
                                     <i class="fa-solid fa-tag fa-4x"></i>
