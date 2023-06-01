@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/carousel-images
 /storage/*.key
 /vendor
 .env

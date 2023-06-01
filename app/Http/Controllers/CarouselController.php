@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Carousel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarouselController extends Controller
 {
@@ -22,7 +23,7 @@ class CarouselController extends Controller
      */
     public function create()
     {
-        //
+        return view('carousels.create');
     }
 
     /**
@@ -30,7 +31,25 @@ class CarouselController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
+        ]);
+
+        $path = Storage::putFile('carousel-images', $request->file('image'));
+
+        $carousel = Carousel::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'carousel_pict' => $path,
+        ]);
+
+        if ($carousel) {
+            return redirect()->route('carousels.index')->with('success', 'Carousel berhasil ditambahkan');
+        } else {
+            return redirect()->back()->with('error', 'Carousel gagal ditambahkan');
+        }
     }
 
     /**
@@ -62,6 +81,8 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        //
+        $carousel->delete();
+
+        return redirect()->route('carousels.index')->with('success', 'Carousel berhasil dihapus');
     }
 }

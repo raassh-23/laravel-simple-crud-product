@@ -10,11 +10,12 @@
                         @foreach ($carouselItems as $item)
                             <div class="{{ 'carousel-item ' . ($loop->first ? 'active' : '') }}"
                                 style="width:100%; height: 400px !important;">
-                                <img src="{{ $item->carousel_pict }}" class="d-block mx-auto"
+                                <img src="{{ asset($item->carousel_pict) }}" class="d-block mx-auto"
                                     style="height: 100%; width: auto;" alt="{{ $item->description }}">
                                 <div class="carousel-caption d-none d-md-block ">
-                                    <h5 class="fw-semibold text-body">{{ $item->name }}</h5>
-                                    <p class="fs-4 text-body">{{ $item->description }}</p>
+                                    <p class="fs-3 fw-semibold mb-0" style="text-shadow: 3px 3px 0px #000000;">
+                                        {{ $item->name }}</p>
+                                    <p class="fs-4" style="text-shadow: 3px 3px 0px #000000;">{{ $item->description }}</p>
                                 </div>
                             </div>
                         @endforeach
