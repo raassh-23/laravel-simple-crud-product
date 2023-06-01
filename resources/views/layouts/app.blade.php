@@ -18,7 +18,7 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="min-height: 100vh;">
+<body class="min-vh-100">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
