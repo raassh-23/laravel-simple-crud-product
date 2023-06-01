@@ -12,7 +12,9 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        //
+        $carousels = Carousel::simplePaginate(5);
+
+        return view('carousels.index', compact('carousels'));
     }
 
     /**

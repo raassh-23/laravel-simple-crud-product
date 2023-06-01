@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +21,8 @@ Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::middleware(IsAdmin::class)->group(function () {
+    Route::resource('carousels', CarouselController::class);
+});
