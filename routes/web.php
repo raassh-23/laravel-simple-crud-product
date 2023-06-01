@@ -24,8 +24,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-
 Route::middleware('auth')->group(function () {
     Route::middleware(IsAdmin::class)->group(function () {
         Route::resource('carousels', CarouselController::class);
@@ -35,3 +33,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 });
+
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');

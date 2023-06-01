@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -22,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -30,7 +31,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
+        ]);
+
+        $path = Storage::putFile('product-images', $request->file('image'));
+
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'product_pict' => $path,
+            'price' => $request->price,
+        ]);
+
+        if ($product) {
+            return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan');
+        } else {
+            return redirect()->back()->with('error', 'Produk gagal ditambahkan');
+        }
     }
 
     /**
@@ -46,7 +67,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -54,7 +75,32 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
+        ]);
+
+        $path = $product->product_pict;
+
+        if ($request->hasFile('image')) {
+            Storage::delete($product->product_pict);
+            $path = Storage::putFile('product-images', $request->file('image'));
+        }
+
+        $success = $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'product_pict' => $path,
+            'price' => $request->price,
+        ]);
+
+        if ($success) {
+            return redirect()->route('products.index')->with('success', 'Produk berhasil diupdate');
+        } else {
+            return redirect()->back()->with('error', 'Produk gagal diupdate');
+        }
     }
 
     /**
@@ -62,6 +108,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus');
     }
 }

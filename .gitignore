@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/carousel-images
+/public/product-images
 /storage/*.key
 /vendor
 .env
