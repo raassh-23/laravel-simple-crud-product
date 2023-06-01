@@ -15,8 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ffb47cf843.js" crossorigin="anonymous"></script>
 </head>
 <body class="min-vh-100">
     <div id="app">
