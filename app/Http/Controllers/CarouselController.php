@@ -57,7 +57,7 @@ class CarouselController extends Controller
      */
     public function show(Carousel $carousel)
     {
-        //
+        return view('carousels.show', compact('carousel'));
     }
 
     /**
@@ -65,7 +65,7 @@ class CarouselController extends Controller
      */
     public function edit(Carousel $carousel)
     {
-        //
+        return view('carousels.edit', compact('carousel'));
     }
 
     /**
@@ -73,7 +73,30 @@ class CarouselController extends Controller
      */
     public function update(Request $request, Carousel $carousel)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
+        ]);
+
+        $path = $carousel->carousel_pict;
+
+        if ($request->hasFile('image')) {
+            Storage::delete($carousel->carousel_pict);
+            $path = Storage::putFile('carousel-images', $request->file('image'));
+        }
+
+        $success = $carousel->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'carousel_pict' => $path,
+        ]);
+
+        if ($success) {
+            return redirect()->route('carousels.index')->with('success', 'Carousel berhasil diedit');
+        } else {
+            return redirect()->back()->with('error', 'Carousel gagal diupdate');
+        }
     }
 
     /**
