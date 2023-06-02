@@ -32,10 +32,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required', 'numeric'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:4096'],
         ]);
 
         $path = Storage::putFile('product-images', $request->file('image'));
@@ -76,10 +76,10 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required', 'numeric'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:4096'],
         ]);
 
         $path = $product->product_pict;

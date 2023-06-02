@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone');
+            $table->string("address");
             $table->string('profile_pic')->nullable();
             $table->enum('role', array_column(UserRoleEnum::cases(), 'value'))
                 ->default(UserRoleEnum::STAFF->value);
@@ -30,7 +32,9 @@ return new class extends Migration
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@admin',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make(env('ADMIN_PASSWORD', 'password123')),
+            'phone' => '0123456789',
+            'address' => '123 Admin Street',
             'role' => UserRoleEnum::ADMIN->value,
         ]);
     }
