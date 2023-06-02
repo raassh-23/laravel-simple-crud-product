@@ -54,15 +54,19 @@ class UserController extends Controller
         ];
 
         if ($request->password) {
+            if ($user->id != auth()->user()->id) {
+                return redirect()->back()->with('error', 'Tidak dapat mengubah password user lain');
+            }
+
             $newData['password'] = Hash::make($request->password);
         }
 
         if ($request->role) {
-            $newData['role'] = $request->role;
-
             if ($user->id === auth()->user()->id) {
                 return redirect()->back()->with('error', 'Tidak dapat mengubah role sendiri');
             }
+
+            $newData['role'] = $request->role;
         }
 
         $success = $user->update($newData);
