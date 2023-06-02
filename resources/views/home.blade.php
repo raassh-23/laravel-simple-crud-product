@@ -45,7 +45,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h4 class="card-title fw-bold">User</h4>
-                                        <a href="#" class="btn btn-primary">Kelola</a>
+                                        <a href="{{ route('users.index') }}" class="btn btn-primary">Kelola</a>
                                     </div>
                                     <div>
                                         <i class="fa-solid fa-user fa-4x"></i>
