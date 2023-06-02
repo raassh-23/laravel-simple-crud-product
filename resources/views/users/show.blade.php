@@ -36,7 +36,8 @@
             <h3>No Telpon</h3>
             <p>{{ $user->phone }}</p>
 
-
+            <h3>Role</h3>
+            <p>{{ Str::ucfirst($user->role) }}</p>
         </div>
     </div>
 @endsection

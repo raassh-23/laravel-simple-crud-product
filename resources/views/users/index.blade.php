@@ -29,12 +29,13 @@
                             <td class="text-center">
                                 <a href="{{ route('users.show', $item) }}" class="btn btn-primary">Detail</a>
                                 <a href="{{ route('users.edit', $item) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('users.destroy', $item) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger">Hapus</button>
-                                </form>
+                                @if (Auth::user()->id != $item->id)
+                                    <form action="{{ route('users.destroy', $item) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger">Hapus</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

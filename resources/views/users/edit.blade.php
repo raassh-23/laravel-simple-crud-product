@@ -66,7 +66,7 @@
                 @if (Auth::user()->isAdmin)
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
-                        <select class="form-select" id="role" name="role">
+                        <select class="form-select" id="role" name="role" {{ Auth::user()->id === $user->id ? 'disabled' : '' }} >
                             @foreach (App\Enums\UserRoleEnum::values() as $role)
                                 <option value="{{ $role }}" {{ $user->role === $role ? 'selected' : '' }}>
                                     {{ Str::ucfirst($role) }}</option>
