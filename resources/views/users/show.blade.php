@@ -6,7 +6,9 @@
             <div class="d-flex justify-content-between align-items-center p-0">
                 <h1>Profil</h1>
                 <div>
-                    <a href="{{ route('users.edit', $user) }}" class="btn btn-warning">Edit</a>
+                    @if (Auth::user()->isAdmin || Auth::user()->id === $user->id)
+                        <a href="{{ route('users.edit', $user) }}" class="btn btn-warning">Edit</a>
+                    @endif
                     @if (Auth::user()->isAdmin && Auth::user()->id != $user->id)
                         <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
                             @csrf
@@ -18,7 +20,7 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <img src="{{ asset($user->profile_pict ? $user->profile_pict : 'default-profile-picture.png') }}"
+                <img src="{{ asset($user->profile_pic ? $user->profile_pic : 'default-profile-picture.png') }}"
                     alt="{{ $user->name }}" class="d-block" style="width: auto; height: 300px;">
             </div>
 

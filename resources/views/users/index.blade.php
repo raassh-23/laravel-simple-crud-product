@@ -13,6 +13,7 @@
                         <th scope="col" class="text-center">Alamat</th>
                         <th scope="col" class="text-center">Email</th>
                         <th scope="col" class="text-center">No Telpon</th>
+                        <th scope="col" class="text-center">Role</th>
                         <th scope="col" class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -24,9 +25,10 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->address }}</td>
                             <td>{{ $item->phone }}</td>
+                            <td>{{ Str::ucfirst($item->role) }}</td>
                             <td class="text-center">
                                 <a href="{{ route('users.show', $item) }}" class="btn btn-primary">Detail</a>
-                                {{-- <a href="{{ route('users.edit', $item) }}" class="btn btn-warning">Edit</a> --}}
+                                <a href="{{ route('users.edit', $item) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('users.destroy', $item) }}" method="POST"
                                     class="d-inline">
                                     @csrf

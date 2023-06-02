@@ -5,6 +5,7 @@
 /public/storage
 /public/carousel-images
 /public/product-images
+/public/user-images
 /storage/*.key
 /vendor
 .env

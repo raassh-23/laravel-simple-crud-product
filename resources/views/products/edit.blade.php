@@ -3,14 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <h1>Tambah Produk</h1>
+            <h1>Edit Produk</h1>
 
             <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama Produk</label>
-                    <input type="text" class="form-control" id="name" name="name" value={{ $product->name }} required>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}" required>
                     @error('name')
                         <div class="text-danger mt-1">
                             {{ $message }}
@@ -29,7 +29,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Harga Produk</label>
-                    <input type="number" class="form-control" id="price" name="price" value={{ $product->price }} required>
+                    <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}" required>
                     @error('price')
                         <div class="text-danger mt-1">
                             {{ $message }}
@@ -47,7 +47,7 @@
                         </div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
             </form>
         </div>
     </div>
